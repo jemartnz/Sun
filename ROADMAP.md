@@ -45,7 +45,7 @@
 | JWT con API moderna | ✅ | JsonWebTokenHandler + SecurityTokenDescriptor |
 | Argon2id password hashing | ✅ | Salt 16 bytes, hash 32 bytes, 64MB RAM, timing-safe verify |
 | Endpoints protegidos con [Authorize] | ✅ | Users y Products requieren JWT |
-| Swagger con botón Authorize | 📋 | Configurar OpenApiSecurityScheme para probar JWT desde Swagger |
+| Swagger con botón Authorize | ✅ | OpenApiSecurityScheme + AddSecurityRequirement configurados en Program.cs |
 
 ---
 
@@ -80,7 +80,7 @@
 | Obtener usuario actual | 📋 | GET /api/users/me (extraer Id del JWT) |
 | **Products** | | |
 | Crear producto | ✅ | POST /api/products |
-| Obtener producto por Id | 📋 | GET /api/products/{id} |
+| Obtener producto por Id | ✅ | GET /api/products/{id} |
 | Listar productos | 📋 | GET /api/products (con paginación) |
 | Actualizar producto | 📋 | PUT /api/products/{id} |
 | Actualizar stock | 📋 | PATCH /api/products/{id}/stock |
