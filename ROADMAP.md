@@ -73,7 +73,7 @@
 |---------|--------|---------|
 | **Users** | | |
 | Obtener usuario por Id | ✅ | GET /api/users/{id} |
-| Listar usuarios | 📋 | GET /api/users (con paginación) |
+| Listar usuarios | ✅ | GET /api/users?page=1&pageSize=10 |
 | Actualizar usuario | 📋 | PUT /api/users/{id} |
 | Actualizar dirección | 📋 | PUT /api/users/{id}/address (usa UpdateAddress() existente) |
 | Eliminar usuario | 📋 | DELETE /api/users/{id} (soft delete vs hard delete) |
@@ -81,7 +81,7 @@
 | **Products** | | |
 | Crear producto | ✅ | POST /api/products |
 | Obtener producto por Id | ✅ | GET /api/products/{id} |
-| Listar productos | 📋 | GET /api/products (con paginación) |
+| Listar productos | ✅ | GET /api/products?page=1&pageSize=10 |
 | Actualizar producto | 📋 | PUT /api/products/{id} |
 | Actualizar stock | 📋 | PATCH /api/products/{id}/stock |
 | Eliminar producto | 📋 | DELETE /api/products/{id} |
@@ -94,9 +94,9 @@
 
 | Feature | Estado | Detalle |
 |---------|--------|---------|
-| Objeto de paginación genérico | 📋 | PagedRequest(Page, PageSize), PagedResponse\<T\>(Items, TotalCount, TotalPages) |
-| Paginación en listado de productos | 📋 | GET /api/products?page=1&pageSize=10 |
-| Paginación en listado de usuarios | 📋 | GET /api/users?page=1&pageSize=10 |
+| Objeto de paginación genérico | ✅ | PagedRequest(Page, PageSize, Skip), PagedResponse\<T\>(Items, TotalCount, TotalPages, HasNextPage, HasPreviousPage) |
+| Paginación en listado de productos | ✅ | GET /api/products?page=1&pageSize=10 |
+| Paginación en listado de usuarios | ✅ | GET /api/users?page=1&pageSize=10 |
 | Filtrado por nombre/precio | 📋 | Query parameters: ?name=x&minPrice=0&maxPrice=100 |
 | Ordenamiento | 📋 | ?sortBy=name&sortOrder=asc |
 

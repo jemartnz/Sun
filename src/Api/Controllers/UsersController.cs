@@ -15,6 +15,13 @@ public sealed class UsersController : ControllerBase
 
     public UsersController(ISender sender) => _sender = sender;
 
+    [HttpGet]
+    public async Task<IActionResult> GetAll([FromQuery] GetUsersQuery query, CancellationToken ct)
+    {
+        var result = await _sender.Send(query, ct);
+        return result.ToActionResult();
+    }
+
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
     {
