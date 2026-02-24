@@ -2,36 +2,36 @@
   "mcpServers": {
 
     "context7": {
-      "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp@latest"],
-      "description": "Documentación actualizada de librerías (.NET, EF Core, MediatR, etc.) directo en el prompt. Evita que Claude use APIs deprecadas o sintaxis desactualizada."
+      "command": "pwsh",
+      "args": ["-Command", "npx", "-y", "@upstash/context7-mcp@latest"],
+      "description": "Documentación actualizada de librerías directo en el prompt."
     },
 
     "sequential-thinking": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
-      "description": "Razonamiento paso a paso para problemas complejos: diseño de arquitectura, debugging difícil, refactorings grandes."
+      "command": "pwsh",
+      "args": ["-Command", "npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "description": "Razonamiento paso a paso para problemas complejos."
     },
 
     "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "command": "pwsh",
+      "args": ["-Command", "npx", "-y", "@modelcontextprotocol/server-github"],
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
       },
-      "description": "Gestión de repositorio: crear PRs, revisar issues, gestionar branches, leer archivos del repo remoto."
+      "description": "Gestión de repositorio: PRs, issues, branches."
     },
 
     "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./src"],
-      "description": "Lectura y escritura controlada de archivos del proyecto. Restringido a la carpeta src/ por seguridad."
+      "command": "pwsh",
+      "args": ["-Command", "npx", "-y", "@modelcontextprotocol/server-filesystem", "./src"],
+      "description": "Lectura y escritura controlada de archivos en src/."
     },
 
     "git": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "."],
-      "description": "Leer historial de commits, buscar en el código, ver diffs, explorar branches sin salir de Claude Code."
+      "command": "pwsh",
+      "args": ["-Command", "npx", "-y", "@modelcontextprotocol/server-git", "--repository", "."],
+      "description": "Historial de commits, diffs, branches."
     }
   }
 }
