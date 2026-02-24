@@ -1,0 +1,37 @@
+{
+  "mcpServers": {
+
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "description": "Documentación actualizada de librerías (.NET, EF Core, MediatR, etc.) directo en el prompt. Evita que Claude use APIs deprecadas o sintaxis desactualizada."
+    },
+
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "description": "Razonamiento paso a paso para problemas complejos: diseño de arquitectura, debugging difícil, refactorings grandes."
+    },
+
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "description": "Gestión de repositorio: crear PRs, revisar issues, gestionar branches, leer archivos del repo remoto."
+    },
+
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./src"],
+      "description": "Lectura y escritura controlada de archivos del proyecto. Restringido a la carpeta src/ por seguridad."
+    },
+
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "."],
+      "description": "Leer historial de commits, buscar en el código, ver diffs, explorar branches sin salir de Claude Code."
+    }
+  }
+}

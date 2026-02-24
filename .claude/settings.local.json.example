@@ -1,0 +1,5 @@
+{
+  "env": {
+    "GITHUB_TOKEN": "ghp_tu_token_aqui"
+  }
+}

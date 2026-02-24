@@ -1,0 +1,57 @@
+﻿using Domain.Commons;
+using Domain.ValueObjects;
+using System.Xml.Linq;
+
+namespace Domain.Entities;
+
+public sealed class User : BaseEntity
+{
+    public string FirstName { get; private set; }
+    public string LastName { get; private set; }
+    public Email Email { get; private set; }
+    public string PasswordHash { get; private set; }
+    public Address? Address { get; private set; }
+
+    private User()
+    {
+        FirstName = null!;
+        LastName = null!;
+        PasswordHash = null!;
+        Email = null!;
+    }
+
+    private User(string firstName, string lastName, Email email, string passwordHash)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        PasswordHash = passwordHash;
+    }
+
+    public static Result<User> Create(string firstName, string lastName, Email email, string passwordHash)
+    {
+        if (string.IsNullOrWhiteSpace(firstName))
+            return Result<User>.Failure(UserErrors.FirstNameRequired);
+
+        if (string.IsNullOrWhiteSpace(lastName))
+            return Result<User>.Failure(UserErrors.LastNameRequired);
+
+        var user = new User(firstName.Trim(), lastName.Trim(), email, passwordHash);
+        return Result<User>.Success(user);
+    }
+
+    public void UpdateAddress(Address address)
+    {
+        Address = address;
+        MarkAsUpdated();
+    }
+}
+
+public static class UserErrors
+{
+    public static readonly Error FirstNameRequired = new("User.FirstNameRequired", "El nombre es obligatorio.");
+    public static readonly Error LastNameRequired = new("User.LastNameRequired", "El apellido es obligatorio.");
+    public static readonly Error EmailAlreadyExists = new("User.EmailAlreadyExists", "Ya existe un usuario con ese email.");
+    public static readonly Error NotFound = new("User.NotFound", "Usuario no encontrado.");
+    public static readonly Error InvalidCredentials = new("User.InvalidCredentials", "Email o contraseña incorrectos.");
+}

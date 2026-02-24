@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="CLAUDE.md" />
+    <File Path="ROADMAP.md" />
+  </Folder>
+  <Project Path="src/Api/Api.csproj" />
+  <Project Path="src/Application/Application.csproj" />
+  <Project Path="src/Domain/Domain.csproj" />
+  <Project Path="src/Infrastructure/Infrastructure.csproj" />
+</Solution>

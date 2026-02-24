@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(dotnet build *)",
+      "Bash(dotnet run --project src/Api)",
+      "Bash(dotnet test *)",
+      "Bash(dotnet ef migrations *)",
+      "Bash(dotnet add * package *)",
+      "Bash(dotnet restore)",
+      "Bash(dotnet clean)",
+      "Bash(docker run *mssql*)",
+      "Bash(docker start sqlserver)",
+      "Bash(docker stop sqlserver)",
+      "Read(src/**)",
+      "Read(CLAUDE.md)",
+      "Read(ROADMAP.md)",
+      "Edit(src/**)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(**/secrets/**)",
+      "Read(**/appsettings.Development.json)",
+      "Bash(rm -rf *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(dotnet ef database drop *)"
+    ]
+  }
+}
