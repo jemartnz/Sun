@@ -21,4 +21,11 @@ public sealed class ProductsController : ControllerBase
         var result = await _sender.Send(command, ct);
         return result.ToActionResult();
     }
+
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
+    {
+        var result = await _sender.Send(new GetProductByIdQuery(id), ct);
+        return result.ToActionResult();
+    }
 }
