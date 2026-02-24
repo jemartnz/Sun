@@ -17,6 +17,14 @@ public sealed class UserRepository : IUserRepository
     public async Task<User?> GetByEmailAsync(Email email, CancellationToken ct = default) =>
         await _context.Users.FirstOrDefaultAsync(u => u.Email.Value == email.Value, ct);
 
+    public async Task<(List<User> Items, int TotalCount)> GetAllAsync(int page, int pageSize, CancellationToken ct = default)
+    {
+        var query = _context.Users.OrderBy(u => u.CreatedAtUtc);
+        var totalCount = await query.CountAsync(ct);
+        var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(ct);
+        return (items, totalCount);
+    }
+
     public async Task AddAsync(User user, CancellationToken ct = default) =>
         await _context.Users.AddAsync(user, ct);
 

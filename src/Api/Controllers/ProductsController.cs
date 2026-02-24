@@ -22,6 +22,13 @@ public sealed class ProductsController : ControllerBase
         return result.ToActionResult();
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetAll([FromQuery] GetProductsQuery query, CancellationToken ct)
+    {
+        var result = await _sender.Send(query, ct);
+        return result.ToActionResult();
+    }
+
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
     {
