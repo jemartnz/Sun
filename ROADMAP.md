@@ -84,7 +84,7 @@
 | Listar productos | ✅ | GET /api/products?page=1&pageSize=10 |
 | Actualizar producto | ✅ | PUT /api/products/{id} |
 | Actualizar stock | ✅ | PATCH /api/products/{id}/stock |
-| Eliminar producto | 📋 | DELETE /api/products/{id} |
+| Eliminar producto | ✅ | DELETE /api/products/{id} (hard delete, HTTP 204) |
 
 ---
 

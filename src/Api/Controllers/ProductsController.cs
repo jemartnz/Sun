@@ -52,6 +52,13 @@ public sealed class ProductsController : ControllerBase
         var result = await _sender.Send(command, ct);
         return result.ToActionResult();
     }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+    {
+        var result = await _sender.Send(new DeleteProductCommand(id), ct);
+        return result.ToNoContentResult();
+    }
 }
 
 public sealed record UpdateProductRequest(
