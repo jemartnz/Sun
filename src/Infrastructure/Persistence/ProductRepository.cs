@@ -13,9 +13,27 @@ public sealed class ProductRepository : IProductRepository
     public async Task<Product?> GetByIdAsync(Guid id, CancellationToken ct = default) =>
         await _context.Products.FirstOrDefaultAsync(p => p.Id == id, ct);
 
-    public async Task<(List<Product> Items, int TotalCount)> GetAllAsync(int page, int pageSize, CancellationToken ct = default)
+    public async Task<(List<Product> Items, int TotalCount)> GetAllAsync(
+        int page,
+        int pageSize,
+        string? name = null,
+        decimal? minPrice = null,
+        decimal? maxPrice = null,
+        CancellationToken ct = default)
     {
-        var query = _context.Products.OrderBy(p => p.CreatedAtUtc);
+        var query = _context.Products.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(name))
+            query = query.Where(p => p.Name.Contains(name));
+
+        if (minPrice.HasValue)
+            query = query.Where(p => p.Price.Amount >= minPrice.Value);
+
+        if (maxPrice.HasValue)
+            query = query.Where(p => p.Price.Amount <= maxPrice.Value);
+
+        query = query.OrderBy(p => p.CreatedAtUtc);
+
         var totalCount = await query.CountAsync(ct);
         var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(ct);
         return (items, totalCount);

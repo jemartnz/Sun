@@ -97,7 +97,7 @@
 | Objeto de paginación genérico | ✅ | PagedRequest(Page, PageSize, Skip), PagedResponse\<T\>(Items, TotalCount, TotalPages, HasNextPage, HasPreviousPage) |
 | Paginación en listado de productos | ✅ | GET /api/products?page=1&pageSize=10 |
 | Paginación en listado de usuarios | ✅ | GET /api/users?page=1&pageSize=10 |
-| Filtrado por nombre/precio | 📋 | Query parameters: ?name=x&minPrice=0&maxPrice=100 |
+| Filtrado por nombre/precio | ✅ | Query parameters: ?name=x&minPrice=0&maxPrice=100 |
 | Ordenamiento | 📋 | ?sortBy=name&sortOrder=asc |
 
 ---
