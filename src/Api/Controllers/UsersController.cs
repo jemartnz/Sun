@@ -28,4 +28,18 @@ public sealed class UsersController : ControllerBase
         var result = await _sender.Send(new GetUserByIdQuery(id), ct);
         return result.ToActionResult();
     }
+
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update(Guid id, UpdateUserRequest request, CancellationToken ct)
+    {
+        var command = new UpdateUserCommand(id, request.FirstName, request.LastName, request.Email, request.Password);
+        var result = await _sender.Send(command, ct);
+        return result.ToActionResult();
+    }
 }
+
+public sealed record UpdateUserRequest(
+    string FirstName,
+    string LastName,
+    string Email,
+    string Password);

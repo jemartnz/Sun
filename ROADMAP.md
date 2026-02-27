@@ -1,7 +1,7 @@
 # ROADMAP.md — Proyecto Sun
 
 > Visión de alto nivel del producto. Qué existe, qué viene, en qué orden.
-> Última actualización: Febrero 2026
+> Última actualización: 24 Febrero 2026
 
 ---
 
@@ -65,7 +65,7 @@
 
 ---
 
-## Fase 4 — CRUD Completo de Entidades 📋
+## Fase 4 — CRUD Completo de Entidades 🔧
 
 > Objetivo: completar todas las operaciones CRUD para Users y Products.
 
@@ -88,7 +88,7 @@
 
 ---
 
-## Fase 5 — Paginación y Filtrado 📋
+## Fase 5 — Paginación y Filtrado 🔧
 
 > Objetivo: respuestas paginadas y búsquedas eficientes para endpoints de listado.
 

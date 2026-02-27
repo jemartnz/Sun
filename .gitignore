@@ -58,6 +58,7 @@ appsettings.*.json
 
 # =============================================
 # EF Core Migrations (mantener en git)
+# =============================================
 src/Infrastructure/Persistence/Migrations/
 
 # =============================================
