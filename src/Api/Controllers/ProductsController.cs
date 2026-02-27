@@ -35,4 +35,20 @@ public sealed class ProductsController : ControllerBase
         var result = await _sender.Send(new GetProductByIdQuery(id), ct);
         return result.ToActionResult();
     }
+
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update(Guid id, UpdateProductRequest request, CancellationToken ct)
+    {
+        var command = new UpdateProductCommand(id, request.Name, request.Description,
+                                               request.PriceAmount, request.PriceCurrency, request.Stock);
+        var result = await _sender.Send(command, ct);
+        return result.ToActionResult();
+    }
 }
+
+public sealed record UpdateProductRequest(
+    string Name,
+    string Description,
+    decimal PriceAmount,
+    string PriceCurrency,
+    int Stock);

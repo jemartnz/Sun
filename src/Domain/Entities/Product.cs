@@ -26,6 +26,21 @@ public sealed class Product : BaseEntity
         Stock = stock;
     }
 
+    public void UpdateInfo(string name, string description, Price price)
+    {
+        Name = name;
+        Description = description;
+        Price = price;
+    }
+
+    public Result UpdateStock(int stock)
+    {
+        if (stock < 0)
+            return Result.Failure(ProductErrors.NegativeStock);
+        Stock = stock;
+        return Result.Success();
+    }
+
     public static Result<Product> Create(string name, string description, Price price, int stock)
     {
         if (string.IsNullOrWhiteSpace(name))
