@@ -11,6 +11,8 @@ public interface IProductRepository
         string? name = null,
         decimal? minPrice = null,
         decimal? maxPrice = null,
+        string? sortBy = null,
+        string? sortOrder = null,
         CancellationToken ct = default);
     Task AddAsync(Product product, CancellationToken ct = default);
     Task RemoveAsync(Product product, CancellationToken ct = default);

@@ -19,7 +19,8 @@ public sealed class GetProductsHandler : IRequestHandler<GetProductsQuery, Resul
     {
         var (products, totalCount) = await _productRepository.GetAllAsync(
             request.Page, request.PageSize,
-            request.Name, request.MinPrice, request.MaxPrice, ct);
+            request.Name, request.MinPrice, request.MaxPrice,
+            request.SortBy, request.SortOrder, ct);
 
         var items = products
             .Select(p => new ProductResponse(p.Id, p.Name, p.Description, p.Price.Amount, p.Price.Currency, p.Stock))

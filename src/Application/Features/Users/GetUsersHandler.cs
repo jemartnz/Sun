@@ -17,7 +17,9 @@ public sealed class GetUsersHandler : IRequestHandler<GetUsersQuery, Result<Page
 
     public async Task<Result<PagedResponse<UserResponse>>> Handle(GetUsersQuery request, CancellationToken ct)
     {
-        var (users, totalCount) = await _userRepository.GetAllAsync(request.Page, request.PageSize, ct);
+        var (users, totalCount) = await _userRepository.GetAllAsync(
+            request.Page, request.PageSize,
+            request.SortBy, request.SortOrder, ct);
 
         var items = users
             .Select(u => new UserResponse(u.Id, u.FirstName, u.LastName, u.Email.Value, u.CreatedAtUtc))

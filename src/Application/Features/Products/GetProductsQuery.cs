@@ -10,4 +10,6 @@ public sealed record GetProductsQuery(
     int PageSize = 10,
     string? Name = null,
     decimal? MinPrice = null,
-    decimal? MaxPrice = null) : IRequest<Result<PagedResponse<ProductResponse>>>;
+    decimal? MaxPrice = null,
+    string? SortBy = null,
+    string? SortOrder = null) : IRequest<Result<PagedResponse<ProductResponse>>>;
