@@ -45,6 +45,15 @@ public sealed class User : BaseEntity
         Address = address;
         MarkAsUpdated();
     }
+
+    public void UpdateInfo(string firstName, string lastName, Email email, string passwordHash)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        PasswordHash = passwordHash;
+        MarkAsUpdated();
+    }
 }
 
 public static class UserErrors
