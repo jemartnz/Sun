@@ -22,6 +22,17 @@ public sealed class UsersController : ControllerBase
         return result.ToActionResult();
     }
 
+    [HttpGet("me")]
+    public async Task<IActionResult> GetMe(CancellationToken ct)
+    {
+        var sub = User.FindFirst("sub")?.Value;
+        if (!Guid.TryParse(sub, out var userId))
+            return Unauthorized();
+
+        var result = await _sender.Send(new GetUserByIdQuery(userId), ct);
+        return result.ToActionResult();
+    }
+
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
     {
@@ -35,6 +46,13 @@ public sealed class UsersController : ControllerBase
         var command = new UpdateUserCommand(id, request.FirstName, request.LastName, request.Email, request.Password);
         var result = await _sender.Send(command, ct);
         return result.ToActionResult();
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+    {
+        var result = await _sender.Send(new DeleteUserCommand(id), ct);
+        return result.ToNoContentResult();
     }
 
     [HttpPut("{id:guid}/address")]

@@ -35,4 +35,37 @@ public sealed class ProductsController : ControllerBase
         var result = await _sender.Send(new GetProductByIdQuery(id), ct);
         return result.ToActionResult();
     }
+
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update(Guid id, UpdateProductRequest request, CancellationToken ct)
+    {
+        var command = new UpdateProductCommand(id, request.Name, request.Description,
+                                               request.PriceAmount, request.PriceCurrency, request.Stock);
+        var result = await _sender.Send(command, ct);
+        return result.ToActionResult();
+    }
+
+    [HttpPatch("{id:guid}/stock")]
+    public async Task<IActionResult> UpdateStock(Guid id, UpdateProductStockRequest request, CancellationToken ct)
+    {
+        var command = new UpdateProductStockCommand(id, request.Stock);
+        var result = await _sender.Send(command, ct);
+        return result.ToActionResult();
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+    {
+        var result = await _sender.Send(new DeleteProductCommand(id), ct);
+        return result.ToNoContentResult();
+    }
 }
+
+public sealed record UpdateProductRequest(
+    string Name,
+    string Description,
+    decimal PriceAmount,
+    string PriceCurrency,
+    int Stock);
+
+public sealed record UpdateProductStockRequest(int Stock);

@@ -76,15 +76,15 @@
 | Listar usuarios | ✅ | GET /api/users?page=1&pageSize=10 |
 | Actualizar usuario | ✅ | PUT /api/users/{id} |
 | Actualizar dirección | ✅ | PUT /api/users/{id}/address (usa UpdateAddress() existente) |
-| Eliminar usuario | 📋 | DELETE /api/users/{id} (soft delete vs hard delete) |
-| Obtener usuario actual | 📋 | GET /api/users/me (extraer Id del JWT) |
+| Eliminar usuario | ✅ | DELETE /api/users/{id} (hard delete, HTTP 204) |
+| Obtener usuario actual | ✅ | GET /api/users/me (extraer Id del JWT) |
 | **Products** | | |
 | Crear producto | ✅ | POST /api/products |
 | Obtener producto por Id | ✅ | GET /api/products/{id} |
 | Listar productos | ✅ | GET /api/products?page=1&pageSize=10 |
-| Actualizar producto | 📋 | PUT /api/products/{id} |
-| Actualizar stock | 📋 | PATCH /api/products/{id}/stock |
-| Eliminar producto | 📋 | DELETE /api/products/{id} |
+| Actualizar producto | ✅ | PUT /api/products/{id} |
+| Actualizar stock | ✅ | PATCH /api/products/{id}/stock |
+| Eliminar producto | ✅ | DELETE /api/products/{id} (hard delete, HTTP 204) |
 
 ---
 
