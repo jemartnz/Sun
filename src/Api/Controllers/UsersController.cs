@@ -36,6 +36,14 @@ public sealed class UsersController : ControllerBase
         var result = await _sender.Send(command, ct);
         return result.ToActionResult();
     }
+
+    [HttpPut("{id:guid}/address")]
+    public async Task<IActionResult> UpdateAddress(Guid id, UpdateUserAddressRequest request, CancellationToken ct)
+    {
+        var command = new UpdateUserAddressCommand(id, request.Street, request.City, request.Country, request.ZipCode);
+        var result = await _sender.Send(command, ct);
+        return result.ToActionResult();
+    }
 }
 
 public sealed record UpdateUserRequest(
@@ -43,3 +51,9 @@ public sealed record UpdateUserRequest(
     string LastName,
     string Email,
     string Password);
+
+public sealed record UpdateUserAddressRequest(
+    string Street,
+    string City,
+    string Country,
+    string? ZipCode);
