@@ -1,7 +1,7 @@
 # ROADMAP.md — Proyecto Sun
 
 > Visión de alto nivel del producto. Qué existe, qué viene, en qué orden.
-> Última actualización: 24 Febrero 2026
+> Última actualización: 27 Febrero 2026
 
 ---
 
@@ -74,8 +74,8 @@
 | **Users** | | |
 | Obtener usuario por Id | ✅ | GET /api/users/{id} |
 | Listar usuarios | ✅ | GET /api/users?page=1&pageSize=10 |
-| Actualizar usuario | 📋 | PUT /api/users/{id} |
-| Actualizar dirección | 📋 | PUT /api/users/{id}/address (usa UpdateAddress() existente) |
+| Actualizar usuario | ✅ | PUT /api/users/{id} |
+| Actualizar dirección | ✅ | PUT /api/users/{id}/address (usa UpdateAddress() existente) |
 | Eliminar usuario | 📋 | DELETE /api/users/{id} (soft delete vs hard delete) |
 | Obtener usuario actual | 📋 | GET /api/users/me (extraer Id del JWT) |
 | **Products** | | |
