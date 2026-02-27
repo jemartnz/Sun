@@ -77,7 +77,7 @@
 | Actualizar usuario | ✅ | PUT /api/users/{id} |
 | Actualizar dirección | ✅ | PUT /api/users/{id}/address (usa UpdateAddress() existente) |
 | Eliminar usuario | ✅ | DELETE /api/users/{id} (hard delete, HTTP 204) |
-| Obtener usuario actual | 📋 | GET /api/users/me (extraer Id del JWT) |
+| Obtener usuario actual | ✅ | GET /api/users/me (extraer Id del JWT) |
 | **Products** | | |
 | Crear producto | ✅ | POST /api/products |
 | Obtener producto por Id | ✅ | GET /api/products/{id} |

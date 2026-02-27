@@ -22,6 +22,17 @@ public sealed class UsersController : ControllerBase
         return result.ToActionResult();
     }
 
+    [HttpGet("me")]
+    public async Task<IActionResult> GetMe(CancellationToken ct)
+    {
+        var sub = User.FindFirst("sub")?.Value;
+        if (!Guid.TryParse(sub, out var userId))
+            return Unauthorized();
+
+        var result = await _sender.Send(new GetUserByIdQuery(userId), ct);
+        return result.ToActionResult();
+    }
+
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
     {
