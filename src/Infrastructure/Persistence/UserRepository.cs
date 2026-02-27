@@ -17,9 +17,24 @@ public sealed class UserRepository : IUserRepository
     public async Task<User?> GetByEmailAsync(Email email, CancellationToken ct = default) =>
         await _context.Users.FirstOrDefaultAsync(u => u.Email.Value == email.Value, ct);
 
-    public async Task<(List<User> Items, int TotalCount)> GetAllAsync(int page, int pageSize, CancellationToken ct = default)
+    public async Task<(List<User> Items, int TotalCount)> GetAllAsync(
+        int page,
+        int pageSize,
+        string? sortBy = null,
+        string? sortOrder = null,
+        CancellationToken ct = default)
     {
-        var query = _context.Users.OrderBy(u => u.CreatedAtUtc);
+        var query = _context.Users.AsQueryable();
+
+        var desc = string.Equals(sortOrder, "desc", StringComparison.OrdinalIgnoreCase);
+        query = sortBy?.ToLowerInvariant() switch
+        {
+            "firstname" => desc ? query.OrderByDescending(u => u.FirstName)    : query.OrderBy(u => u.FirstName),
+            "lastname"  => desc ? query.OrderByDescending(u => u.LastName)     : query.OrderBy(u => u.LastName),
+            "email"     => desc ? query.OrderByDescending(u => u.Email.Value)  : query.OrderBy(u => u.Email.Value),
+            _           => desc ? query.OrderByDescending(u => u.CreatedAtUtc) : query.OrderBy(u => u.CreatedAtUtc),
+        };
+
         var totalCount = await query.CountAsync(ct);
         var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(ct);
         return (items, totalCount);
