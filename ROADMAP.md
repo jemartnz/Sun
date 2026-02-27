@@ -83,7 +83,7 @@
 | Obtener producto por Id | ✅ | GET /api/products/{id} |
 | Listar productos | ✅ | GET /api/products?page=1&pageSize=10 |
 | Actualizar producto | ✅ | PUT /api/products/{id} |
-| Actualizar stock | 📋 | PATCH /api/products/{id}/stock |
+| Actualizar stock | ✅ | PATCH /api/products/{id}/stock |
 | Eliminar producto | 📋 | DELETE /api/products/{id} |
 
 ---

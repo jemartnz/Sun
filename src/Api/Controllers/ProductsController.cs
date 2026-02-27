@@ -44,6 +44,14 @@ public sealed class ProductsController : ControllerBase
         var result = await _sender.Send(command, ct);
         return result.ToActionResult();
     }
+
+    [HttpPatch("{id:guid}/stock")]
+    public async Task<IActionResult> UpdateStock(Guid id, UpdateProductStockRequest request, CancellationToken ct)
+    {
+        var command = new UpdateProductStockCommand(id, request.Stock);
+        var result = await _sender.Send(command, ct);
+        return result.ToActionResult();
+    }
 }
 
 public sealed record UpdateProductRequest(
@@ -52,3 +60,5 @@ public sealed record UpdateProductRequest(
     decimal PriceAmount,
     string PriceCurrency,
     int Stock);
+
+public sealed record UpdateProductStockRequest(int Stock);
