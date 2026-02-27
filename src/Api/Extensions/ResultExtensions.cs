@@ -13,6 +13,14 @@ public static class ResultExtensions
         return ToProblemResult(result.Error);
     }
 
+    public static IActionResult ToNoContentResult(this Result result)
+    {
+        if (result.IsSuccess)
+            return new NoContentResult();
+
+        return ToProblemResult(result.Error);
+    }
+
     public static IActionResult ToActionResult<T>(this Result<T> result)
     {
         if (result.IsSuccess)

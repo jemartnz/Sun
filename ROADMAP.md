@@ -76,7 +76,7 @@
 | Listar usuarios | ✅ | GET /api/users?page=1&pageSize=10 |
 | Actualizar usuario | ✅ | PUT /api/users/{id} |
 | Actualizar dirección | ✅ | PUT /api/users/{id}/address (usa UpdateAddress() existente) |
-| Eliminar usuario | 📋 | DELETE /api/users/{id} (soft delete vs hard delete) |
+| Eliminar usuario | ✅ | DELETE /api/users/{id} (hard delete, HTTP 204) |
 | Obtener usuario actual | 📋 | GET /api/users/me (extraer Id del JWT) |
 | **Products** | | |
 | Crear producto | ✅ | POST /api/products |
