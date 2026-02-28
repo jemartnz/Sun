@@ -1,4 +1,5 @@
 ﻿using Api.Middlewares;
+using Application;
 using Infrastructure;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -40,10 +41,8 @@ public class Program
         // 2. SERVICIOS
         // ============================================================
 
-        // MediatR: escanea el assembly de Application para encontrar handlers
-        builder.Services.AddMediatR(cfg =>
-            cfg.RegisterServicesFromAssembly(
-                typeof(Application.Features.Auth.RegisterUserCommand).Assembly));
+        // Application: MediatR + FluentValidation validators + ValidationBehavior
+        builder.Services.AddApplication();
 
         // Infrastructure: repositorios, hashers, token generator, DbContext
         builder.Services.AddInfrastructure(builder.Configuration);
