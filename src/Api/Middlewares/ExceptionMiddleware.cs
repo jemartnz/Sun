@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace Api.Middlewares;
@@ -19,6 +20,25 @@ public sealed class ExceptionMiddleware
         try
         {
             await _next(context);
+        }
+        catch (ValidationException ex)
+        {
+            context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
+            context.Response.ContentType = "application/problem+json";
+
+            var errors = ex.Errors
+                .GroupBy(f => f.PropertyName)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g.Select(f => f.ErrorMessage).ToArray());
+
+            var problem = new ValidationProblemDetails(errors)
+            {
+                Status = StatusCodes.Status422UnprocessableEntity,
+                Title = "Validation.Failed"
+            };
+
+            await context.Response.WriteAsJsonAsync(problem);
         }
         catch (Exception ex)
         {

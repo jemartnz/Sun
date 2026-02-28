@@ -108,11 +108,11 @@
 
 | Feature | Estado | Detalle |
 |---------|--------|---------|
-| Paquete FluentValidation | 📋 | FluentValidation.DependencyInjectionExtensions |
-| ValidationBehavior para MediatR | 📋 | IPipelineBehavior que ejecuta validadores antes del handler |
-| RegisterUserCommand validator | 📋 | Validar campos requeridos, formato email, largo password |
-| CreateProductCommand validator | 📋 | Validar nombre, precio > 0, stock >= 0 |
-| Respuesta de validación unificada | 📋 | HTTP 422 con lista de errores por campo |
+| Paquete FluentValidation | ✅ | FluentValidation.DependencyInjectionExtensions |
+| ValidationBehavior para MediatR | ✅ | IPipelineBehavior que ejecuta validadores antes del handler |
+| RegisterUserCommand validator | ✅ | Validar campos requeridos, formato email, largo password |
+| CreateProductCommand validator | ✅ | Validar nombre, precio > 0, stock >= 0 |
+| Respuesta de validación unificada | ✅ | HTTP 422 con lista de errores por campo |
 
 ---
 
