@@ -1,7 +1,7 @@
 # ROADMAP.md — Proyecto Sun
 
 > Visión de alto nivel del producto. Qué existe, qué viene, en qué orden.
-> Última actualización: 27 Febrero 2026
+> Última actualización: 6 Marzo 2026 (tarde)
 
 ---
 
@@ -102,7 +102,7 @@
 
 ---
 
-## Fase 6 — Validación con FluentValidation 📋
+## Fase 6 — Validación con FluentValidation ✅
 
 > Objetivo: validar Commands/Queries antes de que lleguen al Handler, usando un pipeline behavior de MediatR.
 
@@ -116,36 +116,36 @@
 
 ---
 
-## Fase 7 — Roles y Autorización 💡
+## Fase 7 — Roles y Autorización ✅
 
 > Objetivo: control de acceso basado en roles (RBAC).
 
 | Feature | Estado | Detalle |
 |---------|--------|---------|
-| Entidad Role | 💡 | Admin, User (como mínimo) |
-| Relación User-Role | 💡 | Muchos a muchos o claim-based |
-| Claims de rol en JWT | 💡 | Incluir rol en el token |
-| Políticas de autorización | 💡 | [Authorize(Roles = "Admin")] o policies |
-| Endpoint admin-only | 💡 | Ej: DELETE /api/users/{id} solo para Admin |
-| Seed de usuario admin | 💡 | Crear admin por defecto en la primera migración |
+| Entidad Role | ✅ | Enum UserRole { User, Admin } en Domain/Enums |
+| Relación User-Role | ✅ | Columna Role (string) en tabla Users, propiedad en User entity |
+| Claims de rol en JWT | ✅ | ClaimTypes.Role incluido en el token |
+| Políticas de autorización | ✅ | Política AdminOnly + FallbackPolicy (usuario autenticado) |
+| Endpoint admin-only | ✅ | DELETE /api/users/{id} solo para Admin |
+| Seed de usuario admin | ✅ | DatabaseSeeder crea admin al arrancar si no existe (AdminSeed en appsettings) |
 
 ---
 
-## Fase 8 — Relaciones entre Entidades 💡
+## Fase 8 — Relaciones entre Entidades ✅
 
 > Objetivo: modelar relaciones reales entre entidades del dominio.
 
 | Feature | Estado | Detalle |
 |---------|--------|---------|
-| Entidad Order | 💡 | User hace pedidos de Products |
-| Entidad OrderItem | 💡 | Producto + cantidad + precio al momento de compra |
-| Relación User → Orders | 💡 | Un usuario tiene muchos pedidos |
-| Relación Order → OrderItems | 💡 | Un pedido tiene muchos items |
-| Reducción de stock al crear orden | 💡 | Lógica de dominio en Order.Create() |
+| Entidad Order | ✅ | UserId, Status (Pending), Items — factory Order.Create() con lógica de negocio |
+| Entidad OrderItem | ✅ | ProductId, Quantity, UnitPrice (snapshot Price VO) — factory internal Create() |
+| Relación User → Orders | ✅ | UserId en Order, tabla Orders con FK |
+| Relación Order → OrderItems | ✅ | HasMany con cascade delete, tabla OrderItems |
+| Reducción de stock al crear orden | ✅ | Product.ReduceStock() llamado en Order.Create(), persistido en una sola transacción |
 
 ---
 
-## Fase 9 — Testing 💡
+## Fase 9 — Testing 📋
 
 > Objetivo: confianza en el código con tests automatizados.
 
