@@ -20,6 +20,7 @@ public static class DependencyInjection
         // Repositorios
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
 
         // Seguridad
         services.AddSingleton<IPasswordHasher, Argon2PasswordHasher>();

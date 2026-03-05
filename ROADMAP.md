@@ -1,7 +1,7 @@
 # ROADMAP.md — Proyecto Sun
 
 > Visión de alto nivel del producto. Qué existe, qué viene, en qué orden.
-> Última actualización: 6 Marzo 2026
+> Última actualización: 6 Marzo 2026 (tarde)
 
 ---
 
@@ -131,21 +131,21 @@
 
 ---
 
-## Fase 8 — Relaciones entre Entidades 📋
+## Fase 8 — Relaciones entre Entidades ✅
 
 > Objetivo: modelar relaciones reales entre entidades del dominio.
 
 | Feature | Estado | Detalle |
 |---------|--------|---------|
-| Entidad Order | 💡 | User hace pedidos de Products |
-| Entidad OrderItem | 💡 | Producto + cantidad + precio al momento de compra |
-| Relación User → Orders | 💡 | Un usuario tiene muchos pedidos |
-| Relación Order → OrderItems | 💡 | Un pedido tiene muchos items |
-| Reducción de stock al crear orden | 💡 | Lógica de dominio en Order.Create() |
+| Entidad Order | ✅ | UserId, Status (Pending), Items — factory Order.Create() con lógica de negocio |
+| Entidad OrderItem | ✅ | ProductId, Quantity, UnitPrice (snapshot Price VO) — factory internal Create() |
+| Relación User → Orders | ✅ | UserId en Order, tabla Orders con FK |
+| Relación Order → OrderItems | ✅ | HasMany con cascade delete, tabla OrderItems |
+| Reducción de stock al crear orden | ✅ | Product.ReduceStock() llamado en Order.Create(), persistido en una sola transacción |
 
 ---
 
-## Fase 9 — Testing 💡
+## Fase 9 — Testing 📋
 
 > Objetivo: confianza en el código con tests automatizados.
 
