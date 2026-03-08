@@ -1,3 +1,4 @@
+![CI](https://github.com/jemartnz/Sun/actions/workflows/ci.yml/badge.svg)
 # ☀️ Sun API
 
 API REST moderna construida con **.NET 10** y **C# 14** siguiendo **Clean Architecture** y buenas prácticas de desarrollo backend.
@@ -28,7 +29,38 @@ API REST moderna construida con **.NET 10** y **C# 14** siguiendo **Clean Archit
 
 ## Inicio Rápido
 
-### Opción A — Docker Compose (recomendado)
+### 0. Clonar el repositorio
+
+```bash
+git clone https://github.com/jemartnz/sun.git
+cd sun
+```
+
+### Opción A — Imagen Docker (GitHub Container Registry)
+
+La imagen oficial está publicada en [ghcr.io/jemartnz/sun](https://github.com/jemartnz/sun/pkgs/container/sun).
+
+```bash
+# Descargar la imagen
+docker pull ghcr.io/jemartnz/sun:latest
+
+# O una versión específica
+docker pull ghcr.io/jemartnz/sun:v1.0.0
+```
+
+Requiere SQL Server. Ejemplo mínimo:
+
+```bash
+docker run -d \
+  -p 8080:8080 \
+  -e ConnectionStrings__Sun="Server=host.docker.internal,1433;Database=SunDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=true" \
+  -e Jwt__Secret="RXN0YUVzVW5hQ2xhdmVTZWNyZXRhTXV5TGFyZ2FRdWVEZWJlVGVuZXJBbE1lbm9zMzJDYXJhY3RlcmVzIQ==" \
+  ghcr.io/jemartnz/sun:latest
+```
+
+Ver `.env.example` para todas las variables de entorno disponibles.
+
+### Opción C — Docker Compose (API + SQL Server + Seq)
 
 Levanta la API, SQL Server y Seq en un solo comando:
 
@@ -43,7 +75,7 @@ docker compose up -d
 | Health Check | http://localhost:8080/health |
 | Seq (logs) | http://localhost:8081 |
 
-### Opción B — Desarrollo local
+### Opción D — Desarrollo local
 
 **Requisitos previos:**
 - [.NET 10 SDK](https://dotnet.microsoft.com/download)
@@ -306,4 +338,4 @@ docker compose logs api -f
 
 ## Licencia
 
-Este proyecto es de uso educativo y de aprendizaje de arquitectura de software.
+MIT — ver [LICENSE](LICENSE) para más detalles.
